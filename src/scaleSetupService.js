@@ -1,31 +1,44 @@
 angular.module('scaleSetup', [])
 .service('scaleSetupService', function() {
 
+    // This service provides utility methods to operate on nested arrays
+    // Ex:
+    // [
+    //   [{ x: 0, y: 5 }, { x: 1, y: 2 }],
+    //   [{ x: 0, y: 1 }, { x: 1, y: 3 }]
+    // ]
+
     return {
-        getXDomain: getXDomain,
-        getYMax: getYMax
+        getDomain:   getDomain,
+        getMaxValue: getMaxValue
     };
 
-        function getXDomain(data, xAccessor) {
 
-            var xValues = [];
+    // Gets the extent of the values returned from the accessor
+    // function in the dataset
+    function getDomain(dataset, valueAccessor) {
 
-            data.forEach(function(lineData) {
-                lineData.forEach(function(lineValue) {
-                    var xValue = xAccessor(lineValue);
-                    xValues.push(xValue);
-                });
+        var dataPointValues = [];
+        dataset.forEach(function(dataArray) {
+            dataArray.forEach(function(dataPoint) {
+                var value = valueAccessor(dataPoint);
+                dataPointValues.push(value);
             });
+        });
 
-            return d3.extent(xValues);
-        }
+        return d3.extent(dataPointValues);
+    }
 
-        function getYMax(data, yAccessor) {
-            var yMax = d3.max(data, function(lineData) {
-                return d3.max(lineData, yAccessor);
-            });
-            
-            return yMax;       
-        }
+    // Gets the max value returned from the accessor function 
+    // in the dataset
+    function getMaxValue(dataset, valueAccessor) {
+
+        var maxValue = d3.max(dataset, function(dataArray) {
+            return d3.max(dataArray, valueAccessor);
+        });
+        
+        return maxValue;       
+    }
+
 
 });

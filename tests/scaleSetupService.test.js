@@ -16,17 +16,17 @@ describe('scaleSetupService', function() {
     }));
 
 
-    it('should, given a nested array, get the x extent', function() {
+    it('should, given a nested array, get the domain', function() {
         
         var expectedResult = [0, 2];
-        var actualResult = scaleSetupService.getXDomain(dataset, xAccessor);
+        var actualResult = scaleSetupService.getDomain(dataset, xAccessor);
         expect(actualResult).toEqual(expectedResult);
     });
 
-    it ('should, given a nested array, get the max y value', function() {
+    it ('should, given a nested array, get the max value', function() {
 
         var expectedResult = 5;
-        var actualResult = scaleSetupService.getYMax(dataset, yAccessor);
+        var actualResult = scaleSetupService.getMaxValue(dataset, yAccessor);
         expect(actualResult).toEqual(expectedResult);
     });
 

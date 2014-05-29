@@ -29,7 +29,7 @@ angular.module('lineChart', ['scaleSetup'])
             selection.each(function(data) {
 
                 // Update x scale
-                var xDomain = scaleSetupService.getXDomain(data, xAccessor);
+                var xDomain = scaleSetupService.getDomain(data, xAccessor);
                 
                 xScale
                 .domain(xDomain)
@@ -37,7 +37,7 @@ angular.module('lineChart', ['scaleSetup'])
 
 
                 // Update y scale
-                var yMax = scaleSetupService.getYMax(data, yAccessor);
+                var yMax = scaleSetupService.getMaxValue(data, yAccessor);
 
                 yScale
                 .domain([0, yMax])
