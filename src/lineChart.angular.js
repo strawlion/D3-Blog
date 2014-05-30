@@ -1,4 +1,4 @@
-angular.module('lineChart', ['scaleSetup'])
+angular.module('customCharts.line', ['scaleSetup'])
 .factory('lineChart', function(scaleSetupService) {
 
     // Data format

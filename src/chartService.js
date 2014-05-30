@@ -1,4 +1,4 @@
-angular.module('customCharts', ['lineChart'])
+angular.module('customCharts', ['customCharts.line'])
 .service('chartService', function(lineChart) {
 
    return {

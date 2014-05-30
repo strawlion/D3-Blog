@@ -39,14 +39,21 @@ d3.custom.lineChart = function() {
             .range([chartHeight, 0]);
 
 
-            var chartContainerData = d3.select(this).selectAll('svg.chartContainer').data([data]);
+            var chartContainerData = d3.select(this).selectAll('svg.chartContainer')
+                                    .data([data]);
 
             // Create containers if they don't exist
-            var chartContainer = chartContainerData.enter().append('svg').attr('class', 'chartContainer');
-            var lineContainer  = chartContainer.append('g').attr('class', 'lineContainer');
+            var chartContainer = chartContainerData.enter()
+                                .append('svg')
+                                .attr('class', 'chartContainer');
+
+            var lineContainer  = chartContainer
+                                .append('g')
+                                .attr('class', 'lineContainer');
 
             if (chartContainer.empty()) {
                 chartContainer = d3.select(this).selectAll('svg.chartContainer');
+
                 lineContainer  = chartContainer.selectAll('g.lineContainer');
             }
 
@@ -56,7 +63,7 @@ d3.custom.lineChart = function() {
 
             // Perform the data join
             var lineData = lineContainer.selectAll('path.line')
-                                        .data(data);
+                            .data(data);
 
             // Update
             lineData.attr('d', line);

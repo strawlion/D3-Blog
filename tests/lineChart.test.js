@@ -13,7 +13,7 @@ describe('lineChart', function() {
     var dataset;
     var chartContainer;
 
-    beforeEach(module('lineChart'));
+    beforeEach(module('customCharts.line'));
     beforeEach(module('customCharts'));
     beforeEach(inject(function($injector) {
         dataset = [
@@ -122,8 +122,8 @@ describe('lineChart', function() {
 
 
         var secondDataset = [
-                                [{ x: 1, y: 3  }, { x: 2, y: 2  }, { x: 3, y: 1  }]
-                            ];
+            [{ x: 1, y: 3  }, { x: 2, y: 2  }, { x: 3, y: 1  }]
+        ];
         var secondLineChart = chartService.lineChart()
                                           .width(20000)
                                           .height(10000);
@@ -141,15 +141,18 @@ describe('lineChart', function() {
 
     it('should draw a line for each line data array in the dataset', function() {
         var multiDataset = [ 
-                             [{ x: 1, y: 20}, { x: 2, y: 40 }, { x: 3, y: 10}, {x: 4, y: 35 }],
-                             [{ x: 1, y: 23}, { x: 2, y: 43 }, { x: 3, y: 13}, {x: 4, y: 38 }], 
-                             [{ x: 1, y: 26}, { x: 2, y: 46 }, { x: 3, y: 16}, {x: 4, y: 41 }]
-                           ];
+         [{ x: 1, y: 20}, { x: 2, y: 40 }, { x: 3, y: 10}, {x: 4, y: 35 }],
+         [{ x: 1, y: 23}, { x: 2, y: 43 }, { x: 3, y: 13}, {x: 4, y: 38 }], 
+         [{ x: 1, y: 26}, { x: 2, y: 46 }, { x: 3, y: 16}, {x: 4, y: 41 }]
+       ];
 
         chartContainer.datum(multiDataset)
                       .call(lineChart);
 
-        var lines = chartContainer.select('g.lineContainer').selectAll('path.line');
+        var lines = chartContainer
+                    .select('g.lineContainer')
+                    .selectAll('path.line');
+
         var lineOneData   = d3.select(lines[0][0]).datum();
         var lineTwoData   = d3.select(lines[0][1]).datum();
         var lineThreeData = d3.select(lines[0][2]).datum();
@@ -162,30 +165,36 @@ describe('lineChart', function() {
 
    it('should redraw every line correctly when drawing with new data', function() {
         var firstMultiDataset = [ 
-                                    [{ x: 1, y: 20}, { x: 2, y: 40 }, { x: 3, y: 10}, {x: 4, y: 35 }],
-                                    [{ x: 1, y: 23}, { x: 2, y: 43 }, { x: 3, y: 13}, {x: 4, y: 38 }], 
-                                    [{ x: 1, y: 26}, { x: 2, y: 46 }, { x: 3, y: 16}, {x: 4, y: 41 }]
-                                ];
+            [{ x: 1, y: 20}, { x: 2, y: 40 }, { x: 3, y: 10}, {x: 4, y: 35 }],
+            [{ x: 1, y: 23}, { x: 2, y: 43 }, { x: 3, y: 13}, {x: 4, y: 38 }], 
+            [{ x: 1, y: 26}, { x: 2, y: 46 }, { x: 3, y: 16}, {x: 4, y: 41 }]
+        ];
 
         chartContainer.datum(firstMultiDataset)
                       .call(lineChart);
 
-        var firstChartLines         = chartContainer.select('g.lineContainer').selectAll('path.line');
+        var firstChartLines = chartContainer
+                              .select('g.lineContainer')
+                              .selectAll('path.line');
+
         var firstChartLineOneData   = d3.select(firstChartLines[0][0]).attr('d');
         var firstChartLineTwoData   = d3.select(firstChartLines[0][1]).attr('d');
         var firstChartLineThreeData = d3.select(firstChartLines[0][2]).attr('d');
 
 
         var secondMultiDataset = [ 
-                                    [{ x: 1, y: 2  }, { x: 2, y: 4   }, { x: 3, y: 1},   {x: 4, y: 3.5 }],
-                                    [{ x: 1, y: 2.3}, { x: 2, y: 4.3 }, { x: 3, y: 1.3}, {x: 4, y: 3.8 }], 
-                                    [{ x: 1, y: 2.6}, { x: 2, y: 4.6 }, { x: 3, y: 1.6}, {x: 4, y: 4.1 }]
-                                 ];
+            [{ x: 1, y: 2  }, { x: 2, y: 4   }, { x: 3, y: 1},   {x: 4, y: 3.5 }],
+            [{ x: 1, y: 2.3}, { x: 2, y: 4.3 }, { x: 3, y: 1.3}, {x: 4, y: 3.8 }], 
+            [{ x: 1, y: 2.6}, { x: 2, y: 4.6 }, { x: 3, y: 1.6}, {x: 4, y: 4.1 }]
+        ];
 
         chartContainer.datum(secondMultiDataset)
                       .call(lineChart);
 
-        var secondChartLines        = chartContainer.select('g.lineContainer').selectAll('path.line');
+        var secondChartLines = chartContainer
+                               .select('g.lineContainer')
+                               .selectAll('path.line');
+
         var secondChartLineOneData   = d3.select(secondChartLines[0][0]).attr('d');
         var secondChartLineTwoData   = d3.select(secondChartLines[0][1]).attr('d');
         var secondChartLineThreeData = d3.select(secondChartLines[0][2]).attr('d');
