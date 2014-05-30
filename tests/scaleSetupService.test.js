@@ -5,7 +5,7 @@ describe('scaleSetupService', function() {
     var xAccessor = function(data) { return data.x; }; 
     var yAccessor = function(data) { return data.y; };
 
-    beforeEach(module('scaleSetup'));
+    beforeEach(module('customCharts.scaleSetup'));
     beforeEach(inject(function($injector) {
         scaleSetupService = $injector.get('scaleSetupService');
 

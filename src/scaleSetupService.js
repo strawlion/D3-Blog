@@ -1,4 +1,4 @@
-angular.module('scaleSetup', [])
+angular.module('customCharts.scaleSetup', [])
 .service('scaleSetupService', function() {
 
     // This service provides utility methods to operate on nested arrays
